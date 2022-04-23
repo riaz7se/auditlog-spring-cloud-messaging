@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    azure:
+      eventhubs:
+        connection-string: [eventhub-namespace-connection-string]
+        processor:
+          checkpoint-store:
+            account-name: <az-event-hub-account-name>
+            account-key: <az-event-acc-access-key>
+            container-name: <az-container-name>
+    stream:
+      function:
+        definition: auditLogConsumer
+      bindings:
+        auditProducer-out-0:
+          destination: jnj-audit-log
+        auditLogConsumer-in-0:
+          destination: jnj-audit-log
+          group: $Default
+      eventhubs:
+        bindings:
+          auditLogConsumer-in-0:
+            consumer:
+              checkpoint:
+                mode: MANUAL
+      poller:
+        initial-delay: 0
+        fixed-delay: 1000

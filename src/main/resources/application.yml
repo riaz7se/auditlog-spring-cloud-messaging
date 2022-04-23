@@ -1,0 +1,23 @@
+spring.cloud.stream:
+  function:
+    definition: auditLogConsumer
+  bindings:
+    auditProducer-out-0:
+      destination: jnj-audit-log
+    auditLogConsumer-in-0:
+      destination: jnj-audit-log
+  kafka:
+    bindings:
+      auditProducer-out-0:
+        producer:
+          configuration:
+            value:
+              serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      auditLogConsumer-in-0:
+        consumer:
+          configuration:
+            value:
+              deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    binder:
+      brokers:
+        - localhost:9092
