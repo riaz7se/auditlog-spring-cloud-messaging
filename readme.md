@@ -14,3 +14,4 @@ spring.cloud.stream.default-binder=eventhub
 #### Run AuditLogEventAplication 
 ### On Local Kafka can be used as Messaging sytem
 
+https://github.com/Azure-Samples/azure-spring-data-cosmos-java-sql-api-getting-started
